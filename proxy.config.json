@@ -1,0 +1,9 @@
+{
+    "/proxyapi": {
+        "target": "http://console.ranyunlong.com:8080/",
+        "secure": "false",
+        "pathRewrite": {
+            "^/proxyapi": "/renren-fast"
+        }
+    }
+}

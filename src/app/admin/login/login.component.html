@@ -1,0 +1,32 @@
+<nz-layout class="layout">
+    <nz-content>
+        21321
+    </nz-content>
+    <nz-sider [nzWidth]="400" class="sider">
+        <div class="form">
+            <form nz-form (submit)="submitForm($event)">
+                <nz-form-item>
+                    <nz-form-label [nzSpan]="6" nzFor="username">账号</nz-form-label>
+                    <nz-form-control [nzSpan]="14">
+                        <input nz-input name="username" type="text" id="username">   
+                    </nz-form-control>
+                </nz-form-item >
+                <nz-form-item>
+                    <nz-form-label [nzSpan]="6" nzFor="password">密码</nz-form-label>
+                    <nz-form-control [nzSpan]="14">
+                        <input nz-input name="password" type="password" id="password">   
+                    </nz-form-control>
+                </nz-form-item >
+                <nz-form-item>
+                    <nz-form-label [nzSpan]="6" nzFor="captcha">验证码</nz-form-label>
+                    <nz-form-control [nzSpan]="14">
+                        <input nz-input name="captcha" type="captcha" id="captcha">   
+                    </nz-form-control>
+                </nz-form-item >
+                <nz-form-item class="submit">
+                    <button nzBlock nz-button type="submit" [nzType]="'primary'">登录</button>
+                </nz-form-item >
+            </form>
+        </div>
+    </nz-sider>
+</nz-layout>
