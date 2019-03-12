@@ -5,23 +5,28 @@
 }
 .layout {
     flex: 1;
-}
-
-.layout .sider {
-    background: #fff;
-}
-
-.layout .sider .form {
-    width: 100%;
-    display: flex;
-    height: inherit;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-}
-
-.layout .sider .form .submit {
-    display: flex;
-    justify-content: center;
-    padding: 0 50px;
+    .sider {
+        background: #fff;
+        .form {
+            width: 100%;
+            display: flex;
+            height: inherit;
+            flex-direction: column;
+            justify-content: center;
+            align-content: center;
+            padding: 30px;
+            .ant-form-item {
+                margin-bottom: 10px;
+            }
+            .submit {
+                display: flex;
+                justify-content: center;
+            }
+            .captcha {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+    }
 }

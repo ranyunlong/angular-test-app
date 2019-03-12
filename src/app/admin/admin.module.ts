@@ -8,7 +8,8 @@ import { RoleComponent } from './role/role.component';
 import { MenuComponent } from './menu/menu.component';
 import { LoginComponent } from './login/login.component';
 import { NotfoundComponent } from './notfound/notfound.component';
-import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { NgZorroAntdModule, NzNotificationService } from 'ng-zorro-antd';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 const routes: Routes = [
     {
@@ -48,11 +49,24 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    declarations: [AdminComponent, IndexComponent, UserComponent, RoleComponent, MenuComponent, LoginComponent, NotfoundComponent],
+    declarations: [
+        AdminComponent,
+        IndexComponent,
+        UserComponent,
+        RoleComponent,
+        MenuComponent,
+        LoginComponent,
+        NotfoundComponent
+    ],
     imports: [
         CommonModule,
         NgZorroAntdModule,
+        ReactiveFormsModule,
+        FormsModule,
         RouterModule.forRoot(routes)
+    ],
+    providers: [
+        NzNotificationService
     ],
     bootstrap: [
         AdminComponent
