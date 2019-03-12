@@ -2,35 +2,46 @@
  * admin reducer
  */
 
-import { AdminSetUserAction, AdminActionTypes } from './admin.action';
+import { AdminSetUserAction, AdminActionTypes, AdminSetUserTokenAction } from './admin.action';
 
 const initstate: AdminState = {
     user: {
-        userId: null,
-        token: '123456',
-        username: 'test',
-        password: '',
-        email: '',
-        mobile: '',
-        status: null,
-        roleIdList: [],
-        createUserId: null,
-        createTime: ''
+        token: localStorage.getItem('token'),
+        userInfo: {
+            userId: null,
+            username: null,
+            password: null,
+            email: null,
+            mobile: null,
+            status: null,
+            roleIdList: null,
+            createUserId: null,
+            createTime: null
+        }
     }
 };
 
-export function adminReducer(state = initstate, action: AdminSetUserAction) {
+export function adminReducer(state = initstate, action: AdminSetUserAction | AdminSetUserTokenAction) {
+    const { user, ...more } = state;
     switch (action.type) {
         case AdminActionTypes.SetUser:
-        return { ...state, user: action.data };
+        user.userInfo = action.userInfo;
+        return { ...more, ...user};
+        case AdminActionTypes.SetUserToken:
+        user.token = action.token;
+        return {...more, ...user};
         default:
         return state;
     }
 }
 
 export interface AdminUserState {
-    userId?: number;
     token?: string;
+    userInfo?: AdminUserInfo;
+}
+
+export interface AdminUserInfo {
+    userId?: number;
     username?: string;
     password?: string;
     email?: string;
