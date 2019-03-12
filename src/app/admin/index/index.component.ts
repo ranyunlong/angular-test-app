@@ -21,7 +21,6 @@ export class IndexComponent implements OnInit {
     public setUser() {
         this.store.dispatch(
             new AdminSetUserAction(
-                AdminActionTypes.SetUser,
                 {
                     username: '张三',
                     password: '12312'

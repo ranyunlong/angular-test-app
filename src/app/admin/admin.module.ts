@@ -8,7 +8,11 @@ import { RoleComponent } from './role/role.component';
 import { MenuComponent } from './menu/menu.component';
 import { LoginComponent } from './login/login.component';
 import { NotfoundComponent } from './notfound/notfound.component';
-import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { NgZorroAntdModule, NzNotificationService } from 'ng-zorro-antd';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AdminHttpInterceptor } from './admin.interceptor';
+import { ReactiveFormsModule, FormsModule, FormBuilder } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Routes = [
     {
@@ -52,7 +56,19 @@ const routes: Routes = [
     imports: [
         CommonModule,
         NgZorroAntdModule,
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
         RouterModule.forRoot(routes)
+    ],
+    providers: [
+        NzNotificationService,
+        FormBuilder,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AdminHttpInterceptor,
+            multi: true
+        }
     ],
     bootstrap: [
         AdminComponent

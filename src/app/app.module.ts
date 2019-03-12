@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -19,9 +19,9 @@ import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
     BrowserModule,
     HomeModule,
     AdminModule,
-    FormsModule,
     NgZorroAntdModule,
     HttpClientModule,
+    FormsModule,
     StoreModule.forRoot({
         admin: adminReducer
     }),

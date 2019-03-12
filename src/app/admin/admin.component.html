@@ -1,4 +1,28 @@
-<p>
-  admin works!11
-</p>
-<router-outlet></router-outlet>
+<nz-layout class="page-admin-root">
+    <nz-header class="header">
+        <a class="logo" href="/admin">陆向谦创新实验室</a>
+        <div class="user-info">
+            <nz-dropdown>
+                <a nz-dropdown>
+                    <nz-avatar nzIcon="user"></nz-avatar> {{userInfo.username}} <i nz-icon type="down"></i>
+                </a>
+                <ul nz-menu nzSelectable>
+                    <li nz-menu-item>
+                        <a>修改密码</a>
+                    </li>
+                    <li nz-menu-divider></li>
+                    <li (click)="logOut()" nz-menu-item>
+                        <a>安全退出</a>
+                    </li>
+                </ul>
+            </nz-dropdown>
+        </div>
+    </nz-header>
+    <nz-layout>
+        <nz-sider [nzWidth]="220" [nzCollapsible]="true" [nzTrigger]="false" [(nzCollapsed)]="collapsed">Sider</nz-sider>
+        <nz-content class="content">
+            {{userInfo.username}}
+            <!-- <router-outlet></router-outlet> -->
+        </nz-content>
+      </nz-layout>
+</nz-layout>
