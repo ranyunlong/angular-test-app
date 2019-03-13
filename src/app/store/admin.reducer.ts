@@ -25,11 +25,9 @@ export function adminReducer(state = initstate, action: AdminSetUserAction | Adm
     const { user, ...more } = state;
     switch (action.type) {
         case AdminActionTypes.SetUser:
-        user.userInfo = action.userInfo;
-        return { ...more, ...user};
+        return { ...more, user: { ...user, userInfo: action.userInfo }};
         case AdminActionTypes.SetUserToken:
-        user.token = action.token;
-        return {...more, ...user};
+        return {...more, user: { ...user,  token: action.token}};
         default:
         return state;
     }

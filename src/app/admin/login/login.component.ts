@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
     private validateForm: FormGroup;
     private uuid: string = uuid();
     private captchaSpinning: boolean;
+    private loading: boolean;
     constructor(
         private http: HttpClient,
         private store: Store<{admin: AdminState}>,
@@ -27,10 +28,10 @@ export class LoginComponent implements OnInit {
     ) {
 
         store.select('admin').subscribe((res) => {
-            if (res.user.token) {
+            if (res && res.user && res.user.token) {
                 router.navigateByUrl('admin', {
                     replaceUrl: true
-                })
+                });
             }
         });
         // 创建表单组 包含的验证规则
@@ -66,6 +67,9 @@ export class LoginComponent implements OnInit {
     }
 
     submitForm(e: Event) {
+        if (this.loading) {
+            return;
+        }
         // 更新验证
         for (const item in  this.validateForm.controls) {
             this.validateForm.controls[item].markAsDirty();
@@ -87,6 +91,7 @@ export class LoginComponent implements OnInit {
                 } else {
                     this.notification.error('提示', res.msg);
                 }
+                this.loading = false;
            });
         }
     }
@@ -94,9 +99,7 @@ export class LoginComponent implements OnInit {
     setUserToken(token: string) {
         localStorage.setItem('token', token);
         this.store.dispatch(
-            new AdminSetUserTokenAction(
-                token
-            )
+            new AdminSetUserTokenAction(token)
         );
     }
 
