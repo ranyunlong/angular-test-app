@@ -90,6 +90,7 @@ export class LoginComponent implements OnInit {
                     });
                 } else {
                     this.notification.error('提示', res.msg);
+                    this.uuid = uuid();
                 }
                 this.loading = false;
            });

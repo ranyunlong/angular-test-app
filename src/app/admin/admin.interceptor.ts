@@ -1,6 +1,9 @@
 import { HttpInterceptor } from '@angular/common/http/src/interceptor';
 import { HttpRequest, HttpHandler, HttpHeaders, HttpResponse } from '@angular/common/http';
+<<<<<<< HEAD
 import { catchError } from 'rxjs/operators';
+=======
+>>>>>>> 04
 import { Observable, ObservableInput } from 'rxjs';
 import { Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd';
@@ -8,7 +11,11 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AdminState } from '../store/admin.reducer';
 import { AdminSetUserTokenAction } from '../store/admin.action';
+<<<<<<< HEAD
 import { tap } from 'rxjs/operators';
+=======
+import { tap, catchError } from 'rxjs/operators';
+>>>>>>> 04
 
 @Injectable()
 export class AdminHttpInterceptor implements HttpInterceptor {
@@ -41,6 +48,10 @@ export class AdminHttpInterceptor implements HttpInterceptor {
         });
 
         return next.handle(cloneRequest).pipe(
+<<<<<<< HEAD
+=======
+            // catchError(this.handleError),
+>>>>>>> 04
             tap((res: HttpResponse<BaseHttpResponse>) => {
                 const{ body } = res;
                 if (body) {
@@ -56,7 +67,7 @@ export class AdminHttpInterceptor implements HttpInterceptor {
                             replaceUrl: true
                         });
                         this.notification.error('提示', msg);
-                    } else if (code !== 0) {
+                    } else if (code && code !== 0) {
                         this.notification.error('提示', msg);
                     }
                 }

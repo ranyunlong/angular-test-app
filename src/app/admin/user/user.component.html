@@ -1,3 +1,60 @@
-<p>
-  user works!
-</p>
+<div class="header">
+    <div class="search">
+        <nz-input-group [nzSuffix]="suffixIconSearch">
+            <input [(ngModel)]="username" type="text" nz-input placeholder="请输入管理员账号">
+        </nz-input-group>
+        <ng-template #suffixIconSearch>
+            <i nz-icon type="search"></i>
+        </ng-template>
+    </div>
+    <button nz-button nzType="primary">新增管理员</button>
+</div>
+
+<nz-table 
+    #basicTable 
+    [nzData]="list"
+    nzTitle="管理员列表"
+    [nzBordered]="true"
+    [nzFrontPagination]="false"
+    [nzShowPagination]="false"
+    nzSize="small"
+    [nzLoading]="loading"
+    >
+    <thead>
+        <tr>
+            <th nzShowCheckbox></th>
+            <th>ID</th>
+            <th>用户名</th>
+            <th>邮箱</th>
+            <th>手机</th>
+            <th>状态</th>
+            <th>创建人</th>
+            <th>创建时间</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of basicTable.data">
+            <td nzShowCheckbox></td>
+            <td>{{data.userId}}</td>
+            <td>{{data.username}}</td>
+            <td>{{data.email}}</td>
+            <td>{{data.mobile}}</td>
+            <td>{{data.status}}</td>
+            <td>{{data.createUserId}}</td>
+            <td>{{data.createTime}}</td>
+        </tr>
+    </tbody>
+</nz-table>
+
+<div class="footer">
+    <button nz-button nzType="danger">批量删除</button>
+    <nz-pagination 
+        [(nzPageIndex)]="page" 
+        [(nzPageSize)]="limit"
+        [nzTotal]="total" 
+        [nzSize]="'small'" 
+        [nzPageSizeOptions]="[5,10]"
+        nzShowSizeChanger 
+        nzShowQuickJumper>
+    </nz-pagination>
+</div>

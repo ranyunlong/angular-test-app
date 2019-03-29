@@ -2,9 +2,10 @@
  * admin reducer
  */
 
-import { AdminSetUserAction, AdminActionTypes, AdminSetUserTokenAction } from './admin.action';
+import { AdminSetUserAction, AdminActionTypes, AdminSetUserTokenAction, AdminSetMenuAction } from './admin.action';
 
 const initstate: AdminState = {
+    menu: null,
     user: {
         token: localStorage.getItem('token'),
         userInfo: {
@@ -21,13 +22,18 @@ const initstate: AdminState = {
     }
 };
 
-export function adminReducer(state = initstate, action: AdminSetUserAction | AdminSetUserTokenAction) {
+export function adminReducer(
+    state = initstate,
+    action: AdminSetUserAction | AdminSetUserTokenAction | AdminSetMenuAction
+) {
     const { user, ...more } = state;
     switch (action.type) {
         case AdminActionTypes.SetUser:
         return { ...more, user: { ...user, userInfo: action.userInfo }};
         case AdminActionTypes.SetUserToken:
         return {...more, user: { ...user,  token: action.token}};
+        case AdminActionTypes.SetMenu:
+        return { ...more, menu: action.menu };
         default:
         return state;
     }
@@ -52,4 +58,21 @@ export interface AdminUserInfo {
 
 export interface AdminState {
     user: AdminUserState;
+    menu: AdminMenuState | null;
+}
+
+export type AdminMenuState = AdminMenu[];
+
+export interface AdminMenu {
+  menuId: number;
+  name: string;
+  parentId: number;
+  parentName: string;
+  url: string;
+  perms: string;
+  type: number;
+  icon: string;
+  orderNum: number;
+  open: boolean;
+  children?: AdminMenu[];
 }
