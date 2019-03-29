@@ -21,6 +21,7 @@ import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
     AdminModule,
     NgZorroAntdModule,
     HttpClientModule,
+    ReactiveFormsModule,
     FormsModule,
     StoreModule.forRoot({
         admin: adminReducer

@@ -19,10 +19,30 @@
         </div>
     </nz-header>
     <nz-layout>
-        <nz-sider [nzWidth]="220" [nzCollapsible]="true" [nzTrigger]="false" [(nzCollapsed)]="collapsed">Sider</nz-sider>
+        <nz-sider
+            [nzWidth]="220"
+            [nzCollapsible]="true"
+            [nzTrigger]="false"
+            [(nzCollapsed)]="collapsed">
+            <ul 
+                nz-menu
+                [nzMode]="'inline'"
+                [nzTheme]="'dark'">
+                <ng-container *ngFor="let item of menu">
+                    <li nz-menu-item *ngIf="item.type === 1">菜单项</li>
+                    <li nz-submenu *ngIf="item.type === 0">
+                        <span title>{{item.name}}</span>
+                        <ul>
+                            <ng-container *ngFor="let children of item.children">
+                                <li nz-menu-item (click)="navigator(children.url)">{{children.name}}</li>
+                            </ng-container>
+                        </ul>
+                    </li>
+                </ng-container>
+            </ul>
+        </nz-sider>
         <nz-content class="content">
-            {{userInfo.username}}
-            <!-- <router-outlet></router-outlet> -->
+            <router-outlet></router-outlet>
         </nz-content>
       </nz-layout>
 </nz-layout>
