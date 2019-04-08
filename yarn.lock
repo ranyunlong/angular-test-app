@@ -383,6 +383,11 @@
   resolved "http://registry.npm.taobao.org/@types/source-list-map/download/@types/source-list-map-0.1.2.tgz#0078836063ffaf17412349bba364087e0ac02ec9"
   integrity sha1-AHiDYGP/rxdBI0m7o2QIfgrALsk=
 
+"@types/validator@^10.11.0":
+  version "10.11.0"
+  resolved "http://registry.npm.taobao.org/@types/validator/download/@types/validator-10.11.0.tgz#aae9009ce28cc4f878e32c34d3900a81193c98d5"
+  integrity sha1-qukAnOKMxPh44yw005AKgRk8mNU=
+
 "@types/webpack-sources@^0.1.5":
   version "0.1.5"
   resolved "http://registry.npm.taobao.org/@types/webpack-sources/download/@types/webpack-sources-0.1.5.tgz#be47c10f783d3d6efe1471ff7f042611bd464a92"
@@ -6843,6 +6848,11 @@ validate-npm-package-name@^3.0.0:
   integrity sha1-X6kS2B630MdK/BQN5zF/DKffQ34=
   dependencies:
     builtins "^1.0.3"
+
+validator@^10.11.0:
+  version "10.11.0"
+  resolved "http://registry.npm.taobao.org/validator/download/validator-10.11.0.tgz#003108ea6e9a9874d31ccc9e5006856ccd76b228"
+  integrity sha1-ADEI6m6amHTTHMyeUAaFbM12sig=
 
 vary@~1.1.2:
   version "1.1.2"

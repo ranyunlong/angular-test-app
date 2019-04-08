@@ -7,7 +7,7 @@
             <i nz-icon type="search"></i>
         </ng-template>
     </div>
-    <button nz-button nzType="primary">新增管理员</button>
+    <button nz-button nzType="primary" (click)="isModalVisible = true; modalTitle='新增管理员' ">新增管理员</button>
 </div>
 
 <nz-table 
@@ -22,7 +22,7 @@
     >
     <thead>
         <tr>
-            <th nzShowCheckbox></th>
+            <th nzShowCheckbox [(nzChecked)]="isCheckAll"  [nzIndeterminate]="isCheck"></th>
             <th>ID</th>
             <th>用户名</th>
             <th>邮箱</th>
@@ -30,11 +30,12 @@
             <th>状态</th>
             <th>创建人</th>
             <th>创建时间</th>
+            <th>操作</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let data of basicTable.data">
-            <td nzShowCheckbox></td>
+            <td nzShowCheckbox [(nzChecked)]="data.selected" (nzCheckedChange)="checkedChange"></td>
             <td>{{data.userId}}</td>
             <td>{{data.username}}</td>
             <td>{{data.email}}</td>
@@ -42,12 +43,15 @@
             <td>{{data.status}}</td>
             <td>{{data.createUserId}}</td>
             <td>{{data.createTime}}</td>
+            <td>
+                <button nz-button nzType="primary" nzSize='small' (click)="handleEdit(data)">编辑</button>
+            </td>
         </tr>
     </tbody>
 </nz-table>
 
 <div class="footer">
-    <button nz-button nzType="danger">批量删除</button>
+    <button nz-button nzType="danger" (click)="deleteMany()">批量删除</button>
     <nz-pagination 
         [(nzPageIndex)]="page" 
         [(nzPageSize)]="limit"
@@ -58,3 +62,65 @@
         nzShowQuickJumper>
     </nz-pagination>
 </div>
+
+<nz-modal
+    [(nzVisible)]="isModalVisible"
+    [nzTitle]="modalTitle"
+    (nzOnCancel)="handleModalCancel()"
+    (nzOnOk)="handleModalOk()"
+    [nzMaskClosable]="false"
+    [nzOkLoading]="OkLoading"
+>
+    <form
+        nz-form
+        [formGroup]="validateForm"
+    >
+        <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzFor="username">账户</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input formControlName="username" type="text" id="username">
+                <nz-form-explain *ngIf="validate('username')">
+                    {{getFormError('username')}}
+                </nz-form-explain>
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzFor="password">密码</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input formControlName="password" type="password" id="password">
+                <nz-form-explain *ngIf="validate('password')">
+                    {{getFormError('password')}}
+                </nz-form-explain>
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzFor="email">邮箱</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input formControlName="email" type="email" id="email">
+                <nz-form-explain *ngIf="validate('email')">
+                    {{getFormError('email')}}
+                </nz-form-explain>
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzFor="mobile">手机</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input formControlName="mobile" type="number" id="mobile">
+                <nz-form-explain *ngIf="validate('mobile')">
+                    {{getFormError('mobile')}}
+                </nz-form-explain>
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-label [nzSpan]="6">状态</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <!-- [(ngModel)]="switchValue" -->
+                    <nz-switch formControlName="status"></nz-switch>
+            </nz-form-control>
+        </nz-form-item>
+    </form>
+</nz-modal>
