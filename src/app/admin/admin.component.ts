@@ -30,7 +30,7 @@ export class AdminComponent implements OnInit {
                     }
                 } else if (state.menu) {
                     if (Array.isArray(state.menu)) {
-                       this.menu = this.pipeMenu(state.menu, 0);
+                       this.menu = this.pipeMenu(JSON.parse(JSON.stringify(state.menu)), 0);
                     }
                 }
             }
@@ -84,7 +84,7 @@ export class AdminComponent implements OnInit {
     public getMenuList() {
         this.http.get('/sys/menu/list').subscribe((res: AdminMenu)  => {
             if (Array.isArray(res)) {
-                this.store.dispatch(new AdminSetMenuAction(res))
+                this.store.dispatch(new AdminSetMenuAction(res));
             }
         });
     }

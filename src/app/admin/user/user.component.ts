@@ -126,6 +126,10 @@ export class UserComponent implements OnInit, OnChanges {
         console.log(arg);
     }
 
+    /**
+     * 验证表单
+     * @param key 表单的字段名称
+     */
     public validate(key: string) {
         return this.validateForm.get(key).errors && this.validateForm.get(key).dirty;
     }
@@ -177,7 +181,7 @@ export class UserComponent implements OnInit, OnChanges {
             userInfo.status = userInfo.status ? 0 : 1;
             if (this.modalTitle === '新增管理员') {
                 userInfo.userId = userInfo.userId ? userInfo.userId : 0;
-                userInfo.roleIdList = [0];
+                userInfo.roleIdList = [];
                 this.OkLoading = true;
                 return this.http.post('/sys/user/save', userInfo).subscribe((res: BaseHttpResponse) => {
                     const { code, msg } = res;
@@ -187,7 +191,7 @@ export class UserComponent implements OnInit, OnChanges {
                         this.isModalVisible = false;
                         this.getUserList();
                     } else {
-                        this.notification.error('失败', msg);
+                        // this.notification.error('失败', msg);
                         this.OkLoading = false;
                     }
                 });
@@ -208,7 +212,7 @@ export class UserComponent implements OnInit, OnChanges {
                         this.isModalVisible = false;
                         this.getUserList();
                     } else {
-                        this.notification.error('失败', msg);
+                        // this.notification.error('失败', msg);
                         this.OkLoading = false;
                     }
                 });

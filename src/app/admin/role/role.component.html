@@ -1,3 +1,82 @@
-<p>
-  role works!
-</p>
+<div class="header">
+    <div class="search">
+        <nz-input-group [nzSuffix]="suffixIconSearch">
+            <input [(ngModel)]="username" type="text" nz-input placeholder="输入角色名称">
+        </nz-input-group>
+        <ng-template #suffixIconSearch>
+            <i nz-icon type="search"></i>
+        </ng-template>
+    </div>
+    <button nz-button nzType="primary" (click)="modalTitle='新增角色' ">新增角色</button>
+</div>
+
+
+<nz-table 
+    #basicTable 
+    [nzData]="list"
+    nzTitle="管理员列表"
+    [nzBordered]="true"
+    [nzFrontPagination]="false"
+    [nzShowPagination]="false"
+    nzSize="small"
+    >
+    <thead>
+        <tr>
+            <th nzShowCheckbox [(nzChecked)]="isCheckAll"  [nzIndeterminate]="isCheck"></th>
+            <th>ID</th>
+            <th>角色名</th>
+            <th>描述</th>
+            <th>创建人</th>
+            <th>创建时间</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of basicTable.data">
+            <td nzShowCheckbox [(nzChecked)]="data.selected" (nzCheckedChange)="checkedChange"></td>
+            <td>{{data.roleId}}</td>
+            <td>{{data.roleName}}</td>
+            <td>{{data.remark}}</td>
+            <td>{{data.createUserId}}</td>
+            <td>{{data.createTime}}</td>
+            <td>
+                <!-- <button nz-button nzType="primary" nzSize='small' (click)="handleEdit(data)">编辑</button> -->
+            </td>
+        </tr>
+    </tbody>
+</nz-table>
+
+
+<nz-modal
+    [(nzVisible)]="modalTitle"
+    [nzTitle]="modalTitle"
+    (nzOnCancel)="handleModalCancel()"
+    (nzOnOk)="handleModalOk()"
+    [nzMaskClosable]="false"
+    [nzOkLoading]="OkLoading"
+>
+    <form
+        nz-form
+        [formGroup]="validateForm"
+    >
+        <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzFor="roleName">角色名称</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input formControlName="roleName" type="text" id="roleName">
+                <nz-form-explain *ngIf="validate('roleName')">
+                    {{getFormError('roleName')}}
+                </nz-form-explain>
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-label [nzSpan]="6" nzFor="remark">角色描述</nz-form-label>
+            <nz-form-control [nzSpan]="14">
+                <input nz-input formControlName="remark" type="text" id="remark">
+                <nz-form-explain *ngIf="validate('remark')">
+                    {{getFormError('remark')}}
+                </nz-form-explain>
+            </nz-form-control>
+        </nz-form-item>
+    </form>
+</nz-modal>

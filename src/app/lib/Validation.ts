@@ -1,4 +1,4 @@
-import { isEmail, isEmpty, isMobilePhone, isLength } from 'validator';
+import { isEmail, isEmpty, isMobilePhone, isLength, isNumeric } from 'validator';
 import { AbstractControl } from '@angular/forms';
 
 function formatData(value: any): string {
@@ -37,6 +37,17 @@ export class Validation {
                 return null;
             }
             if (!isMobilePhone(String(control.value), 'zh-CN')) {
+                return { message };
+            }
+        };
+    }
+
+    static isNumeric(message: string = 'Invalid param number.') {
+        return (control: AbstractControl) => {
+            if (!control.value) {
+                return null;
+            }
+            if (!isNumeric(String(control.value))) {
                 return { message };
             }
         };
